@@ -1,6 +1,6 @@
 #Gavril Marian
 from tkinter import *
-
+import sqlite3
 class MyFirstGUI:
     
     def __init__(self, master):
@@ -67,7 +67,25 @@ class MyFirstGUI:
         except Exception as e:
             print(f"An error occurred: {e}")
     def print_all(self):
-        print()
+        try:
+     
+            connection = sqlite3.connect('tennisclub.db')
+            db_cursor = connection.cursor()
+        
+   
+            db_cursor.execute("SELECT * FROM member")
+            all_members = db_cursor.fetchall()
+        
+        
+            for member in all_members:
+                print(member)
+        
+      
+            connection.close()
+    
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        
     def close(self):
         root.destroy()
         
