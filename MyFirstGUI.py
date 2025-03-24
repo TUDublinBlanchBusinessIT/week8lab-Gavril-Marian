@@ -36,12 +36,43 @@ class MyFirstGUI:
         self.closeButton.pack()
 
     def insert_into_db(self):
-         print()
+        firstname = self.entry1.get()
+        surname = self.entry2.get()
+        dob = self.entry3.get()
+        member_type = self.entry4.get()
+
+   
+        sql_command = f"INSERT INTO member(firstname, surname, dateofbirth, membertype) VALUES ('{firstname}', '{surname}', '{dob}', '{member_type}')"
+       
+     
+        print(f"SQL Command: {sql_command}")
+       
+       
+        try:
+           
+            connect = sqlite3.connect('tennisclub.db')
+            cursor = conn.cursor()
+           
+         
+            cursor.execute(sql_command)
+           
+           
+            connect.commit()
+           
+         
+            connect.close()
+           
+            print("Data inserted successfully")
+       
+        except Exception as e:
+            print(f"An error occurred: {e}")
     def print_all(self):
         print()
     def close(self):
         root.destroy()
         
+         
+       
 
 
 
